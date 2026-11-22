@@ -8,6 +8,7 @@ import { Galerie, Photo, Produit, Telephone, Video } from './images';
 import { Etapes, Liste, Recap } from './listes';
 import { Code, Schema, Terminal } from './technique';
 import { Appel, Carte, Citation, Titre } from './texte';
+import { Cinetique } from './cinetique';
 
 export const BRIQUES: Record<string, FC<any>> = {
   intro: Intro, outro: Outro, chapitre: Chapitre,
@@ -17,6 +18,7 @@ export const BRIQUES: Record<string, FC<any>> = {
   photo: Photo, galerie: Galerie, video: Video, produit: Produit, telephone: Telephone,
   ecran: Ecran,
   code: Code, terminal: Terminal, schema: Schema,
+  cinetique: Cinetique,
 };
 
 // Briques qui couvrent tout l'écran avec une image : pas de fond de charte derrière

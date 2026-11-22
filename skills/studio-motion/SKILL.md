@@ -19,7 +19,11 @@ non respectée.
 | Affiche, visuel pour réseaux sociaux (4:5, 1:1, 9:16, 16:9, A4/A3 à imprimer) | [guides/affiche.md](guides/affiche.md) |
 | Document PDF mis en page (plaquette, guide, rapport, proposition, fiche) | [guides/document.md](guides/document.md) |
 | Voix off calée au mot, sous-titres, mixage, musique propre à chaque vidéo | [guides/voix.md](guides/voix.md) |
+| Rythme (posé, dynamique, nerveux), typographie animée, mise en scène libre calée sur la voix | [guides/rythme.md](guides/rythme.md) |
 | Légendes et hashtags pour publier | [guides/publication.md](guides/publication.md) |
+
+Ne vous enfermez pas dans les briques : pour les réseaux sociaux, choisissez le rythme `dynamique` ou `nerveux`
+et écrivez des scènes libres calées sur la voix ([guides/rythme.md](guides/rythme.md)).
 
 `guides/video.md` renvoie ensuite vers : [guides/recettes.md](guides/recettes.md) (enchaînements éprouvés),
 [guides/briques.md](guides/briques.md) (toutes les briques et leurs réglages) et

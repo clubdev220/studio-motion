@@ -1,7 +1,7 @@
 // Briques techniques : code, terminal, schéma (repris de la bibliothèque Studio Motion, adaptés à la charte et aux formats)
 import type { ReactNode } from 'react';
-import { AbsoluteFill, spring, useCurrentFrame, useVideoConfig } from 'remotion';
-import { OMBRE, Surtitre, T, ease, useCharte, useEchelle, useRebond } from '../outils';
+import { AbsoluteFill, spring, useVideoConfig } from 'remotion';
+import { OMBRE, Surtitre, T, ease, useCharte, useEchelle, useRebond, useImage } from '../outils';
 
 const SYNTAXE = { kw: '#c4a7ff', str: '#f7c27d', num: '#7fd6ea', com: '#7c7b92', fn: '#ffd479', vr: '#8fe3c0', txt: '#ecebf3' };
 const KW = /^(const|let|var|if|else|return|true|false|null|undefined|async|await|function|new|import|from|export|for|of|in|while|try|catch|def|class|print|echo)$/;
@@ -38,7 +38,7 @@ const Fenetre = ({ titre, largeur, hauteur, children }: { titre: ReactNode; larg
 export const Code = ({ code, fichier = '', surligner = [], annotations = [], titre }: { code: string; fichier?: string; surligner?: number[]; annotations?: { ligne: number; texte: string }[]; titre?: string }) => {
   const { c, code: mono, texte, titres } = useCharte();
   const { u, portrait, paysage, width } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const { durationInFrames, fps } = useVideoConfig();
   const lignes = code.replace(/\t/g, '  ').split('\n');
   const n = lignes.length;
@@ -78,7 +78,7 @@ export const Code = ({ code, fichier = '', surligner = [], annotations = [], tit
 export const Terminal = ({ commandes, sortie = [], dossier = '~', shell = 'bash', titre }: { commandes: string[]; sortie?: string[]; dossier?: string; shell?: 'bash' | 'powershell'; titre?: string }) => {
   const { c, code: mono, titres } = useCharte();
   const { u, portrait, paysage, width } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const { durationInFrames } = useVideoConfig();
   const ps = shell === 'powershell';
   const invite = ps ? `PS ${dossier}>` : `${dossier} $`;
@@ -113,7 +113,7 @@ export const Terminal = ({ commandes, sortie = [], dossier = '~', shell = 'bash'
 export const Schema = ({ disposition = 'chaine', noeuds, liens = [], titres: entetes, titre }: { disposition?: 'chaine' | 'etoile' | 'comparaison'; noeuds: { id: string; libelle: string }[]; liens?: { de: string; a: string; libelle?: string }[]; titres?: [string, string]; titre?: string }) => {
   const { c, titres, texte } = useCharte();
   const { width, height, portrait, u } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const { fps } = useVideoConfig();
   const W = width, H = height;
   const nT = (i: number) => spring({ frame: frame - 6 - i * 7, fps, config: { damping: 15, stiffness: 130 } });

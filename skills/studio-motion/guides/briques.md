@@ -30,6 +30,12 @@ Tout est facultatif ; `signature` remplace celle de la charte.
 
 ## Texte
 
+### `cinetique` — typographie animée calée sur la voix (1–3 s)
+```json
+{ "brique": "cinetique", "style": "impact", "texte": "Tes plantes *meurent* ?", "voix": "Tes plantes meurent ?" }
+```
+Styles `empile`, `impact`, `mot` ; chaque mot apparaît quand la voix le prononce. Détails : [rythme.md](rythme.md#3-la-typographie-animée--brique-cinetique).
+
 ### `titre` — grande phrase qui apparaît mot à mot (4–6 s)
 ```json
 { "brique": "titre", "duree": 4.5, "surtitre": "Nouveauté", "texte": "Le mug qui garde votre thé *chaud*", "sousTexte": "Disponible dès aujourd'hui.", "alignement": "centre", "taille": "grand" }

@@ -5,6 +5,7 @@ scènes, ou insérez une scène libre. Les durées sont indicatives ; le vérifi
 
 | Recette | Format conseillé | Durée | Matériaux |
 | --- | --- | --- | --- |
+| [Vidéo courte nerveuse (astuce, liste, niveaux)](rythme.md#2-écrire-une-vidéo-nerveuse) | 9:16 | 30 – 60 s | voix off, scènes libres, `cinetique` |
 | [Tutoriel de logiciel](#tutoriel-de-logiciel) | 16:9 | 1 min 30 – 3 min 30 | captures d'écran |
 | [Promo produit](#promo-produit) | 9:16 (et 1:1) | 25 – 45 s | photos du produit, prix fourni |
 | [Vidéo explicative](#vidéo-explicative) | 16:9 ou 9:16 | 60 – 120 s | texte, schémas, icônes |

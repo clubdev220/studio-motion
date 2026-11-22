@@ -1,7 +1,7 @@
 // Briques de données : chiffre clé, graphique en barres, frise chronologique
 // Règle : uniquement des chiffres FOURNIS par l'utilisateur ou vérifiés (source à citer avec `source`).
-import { AbsoluteFill, useCurrentFrame, useVideoConfig } from 'remotion';
-import { OMBRE, Surtitre, T, ease, useCharte, useEchelle, useRebond } from '../outils';
+import { AbsoluteFill, useVideoConfig } from 'remotion';
+import { OMBRE, Surtitre, T, ease, useCharte, useEchelle, useRebond, useImage } from '../outils';
 
 // Fait défiler la partie numérique d'un texte (« 12 500 FCFA », « −80 % », « 4,8/5 ») de 0 à sa valeur
 const compter = (valeur: string, p: number) => {
@@ -19,7 +19,7 @@ const compter = (valeur: string, p: number) => {
 export const Chiffre = ({ valeur, legende, surtitre, source, compteur = true }: { valeur: string; legende?: string; surtitre?: string; source?: string; compteur?: boolean }) => {
   const { c, titres, texte } = useCharte();
   const { u, portrait } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const s = useRebond()(0, 120, 14);
   const p = compteur ? ease(frame, 4, 40, 0, 1) : 1;
   const long = valeur.length > 9;
@@ -40,7 +40,7 @@ export const Chiffre = ({ valeur, legende, surtitre, source, compteur = true }: 
 export const Barres = ({ titre, donnees, unite = '', source, surtitre }: { titre?: string; donnees: { libelle: string; valeur: number; affichage?: string; enAvant?: boolean }[]; unite?: string; source?: string; surtitre?: string }) => {
   const { c, titres, texte } = useCharte();
   const { u, portrait } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const r = useRebond();
   const max = Math.max(...donnees.map(d => d.valeur), 1);
   return (
@@ -72,7 +72,7 @@ export const Barres = ({ titre, donnees, unite = '', source, surtitre }: { titre
 export const Frise = ({ titre, etapes }: { titre?: string; etapes: { date: string; libelle: string }[] }) => {
   const { c, titres, texte } = useCharte();
   const { u, portrait } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const { durationInFrames } = useVideoConfig();
   const r = useRebond();
   const items = etapes.slice(0, 5);

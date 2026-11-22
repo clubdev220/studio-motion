@@ -1,6 +1,6 @@
 // Briques de listes : liste à puces / numérotée / à icônes, étapes, récapitulatif
-import { AbsoluteFill, useCurrentFrame, useVideoConfig } from 'remotion';
-import { Icone, OMBRE, Surtitre, T, ease, typo, useCharte, useEchelle, useRebond, type NomIcone } from '../outils';
+import { AbsoluteFill, useVideoConfig } from 'remotion';
+import { Icone, OMBRE, Surtitre, T, ease, typo, useCharte, useEchelle, useRebond, type NomIcone, useImage } from '../outils';
 
 type Element = string | { texte: string; detail?: string; icone?: NomIcone };
 const norm = (e: Element) => (typeof e === 'string' ? { texte: e } : e);
@@ -9,7 +9,7 @@ const norm = (e: Element) => (typeof e === 'string' ? { texte: e } : e);
 export const Liste = ({ titre, surtitre, elements, style = 'puces' }: { titre?: string; surtitre?: string; elements: Element[]; style?: 'puces' | 'numeros' | 'icones' }) => {
   const { c, titres, texte } = useCharte();
   const { u, portrait } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const { durationInFrames } = useVideoConfig();
   const r = useRebond();
   const pas = Math.min(36, (durationInFrames * 0.5) / Math.max(1, elements.length));
@@ -43,7 +43,7 @@ export const Liste = ({ titre, surtitre, elements, style = 'puces' }: { titre?: 
 export const Etapes = ({ titre, etapes, active = 0 }: { titre?: string; etapes: string[]; active?: number }) => {
   const { c, titres, texte } = useCharte();
   const { u, portrait } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const r = useRebond();
   const pop = r(14 + etapes.length * 4, 140, 14);
   return (
@@ -73,7 +73,7 @@ export const Etapes = ({ titre, etapes, active = 0 }: { titre?: string; etapes: 
 export const Recap = ({ titre, items, surtitre }: { titre: string; items: string[]; surtitre?: string }) => {
   const { c, titres, texte } = useCharte();
   const { u, portrait } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const { durationInFrames } = useVideoConfig();
   const r = useRebond();
   const step = Math.min(30, (durationInFrames * 0.5) / Math.max(1, items.length));

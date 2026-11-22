@@ -1,10 +1,31 @@
 // Aides communes à toutes les briques. C'est aussi l'API offerte aux scènes « libres » écrites par l'agent :
 //   import { useCharte, useEchelle, ease, rebond, T, Accent, Logo, Filet, Icone, media } from 'studio-motion';
-import type { CSSProperties, ReactNode } from 'react';
+import { createContext, useContext, type CSSProperties, type ReactNode } from 'react';
 import { Easing, Img, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
 import { useCharte } from './charte';
 
 export { useCharte };
+export { useRythme } from './rythme';
+import { RythmeCtx as RythmeCtxInterne } from './rythme';
+
+// Mots de la voix off de la scène en cours (instants en secondes depuis le début de la scène). Vide sans voix.
+export type MotVoix = { w: string; s: number; e: number };
+export const VoixCtx = createContext<MotVoix[]>([]);
+const norm = (t: string) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9%]/g, '');
+// Caler une animation sur la voix : image(i) = image où le mot i commence ; trouve("riz") = index du premier mot
+// qui contient « riz » ; ressort(i) = ressort 0 → 1 qui part au mot i ; actuel = index du mot prononcé.
+export const useVoix = () => {
+  const mots = useContext(VoixCtx);
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const image = (i: number) => (mots.length ? Math.round(mots[Math.max(0, Math.min(i, mots.length - 1))].s * fps) : 0);
+  const trouve = (motif: string, apres = 0) => { const n = norm(motif); const k = mots.findIndex((m, j) => j >= apres && norm(m.w).includes(n)); return k; };
+  const ressort = (i: number, raideur = 160, amorti = 14) => spring({ frame: frame - image(i), fps, config: { damping: amorti, stiffness: raideur } });
+  const t = frame / fps;
+  let actuel = -1;
+  mots.forEach((m, j) => { if (t >= m.s - 0.03) actuel = j; });
+  return { mots, image, trouve, ressort, actuel, t, avecVoix: mots.length > 0 };
+};
 export const clamp = { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' } as const;
 
 // Transition douce d'une valeur entre deux images (frames)
@@ -12,8 +33,13 @@ export const ease = (f: number, a: number, b: number, from: number, to: number) 
   interpolate(f, [a, b], [from, to], { ...clamp, easing: Easing.inOut(Easing.cubic) });
 
 // Ressort (0 → 1) qui démarre à l'image `debut`
-export const useRebond = () => {
+// Image en cours, accélérée selon le rythme (les animations d'entrée vont plus vite en « dynamique » et « nerveux »)
+export const useImage = () => {
   const frame = useCurrentFrame();
+  return frame * useContext(RythmeCtxInterne).vitesse;
+};
+export const useRebond = () => {
+  const frame = useImage();
   const { fps } = useVideoConfig();
   return (debut = 0, raideur = 120, amorti = 18) => spring({ frame: frame - debut, fps, config: { damping: amorti, stiffness: raideur } });
 };
