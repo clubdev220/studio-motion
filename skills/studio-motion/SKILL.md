@@ -1,6 +1,6 @@
 ---
 name: studio-motion
-description: Fabrique des vidéos en motion design de qualité professionnelle (MP4, formats 16:9, 9:16 et 1:1) rendues par du code (Remotion), sans modèle de génération vidéo — tutoriels à captures d'écran, promos produit pour TikTok/Reels/Shorts, vidéos explicatives, chiffres clés, annonces, présentations, témoignages. Bibliothèque de briques animées aux couleurs de la marque, recettes éprouvées, scènes libres en code, musique originale sans droits. À utiliser pour toute demande de vidéo, d'animation, de motion design ou de contenu vidéo pour les réseaux sociaux. Pack évolutif : affiches et documents PDF à venir.
+description: Fabrique par le code des visuels de qualité professionnelle aux couleurs d'une marque — vidéos en motion design (MP4 16:9, 9:16, 1:1 ; tutoriels, promos TikTok/Reels/Shorts, explicatives, chiffres clés, annonces) avec voix off calée au mot, sous-titres et musique ; affiches et visuels pour les réseaux sociaux (PNG, PDF à imprimer) ; documents PDF mis en page (plaquette, guide, rapport, proposition) ; légendes de publication. Sans modèle de génération d'images ou de vidéo : texte net, informations exactes, charte respectée. À utiliser pour toute demande de vidéo, d'animation, de motion design, d'affiche, de flyer, de visuel, de post pour les réseaux sociaux, de plaquette ou de document PDF.
 ---
 
 # studio-motion
@@ -17,11 +17,18 @@ non respectée.
 | Toute vidéo (tutoriel, promo, explicative, chiffres, annonce, présentation…) | [guides/video.md](guides/video.md) |
 | Affiche, visuel pour réseaux sociaux (4:5, 1:1, 9:16, 16:9, A4/A3 à imprimer) | [guides/affiche.md](guides/affiche.md) |
 | Document PDF mis en page (plaquette, guide, rapport, proposition, fiche) | [guides/document.md](guides/document.md) |
+| Voix off calée au mot, sous-titres, mixage, musique propre à chaque vidéo | [guides/voix.md](guides/voix.md) |
+| Légendes et hashtags pour publier | [guides/publication.md](guides/publication.md) |
+| Chartes prêtes (abdouliatech, Studio Voix d'Afrique, CO Digitale) | [chartes/LISEZMOI.md](chartes/LISEZMOI.md) |
 
 `guides/video.md` renvoie ensuite vers : [guides/recettes.md](guides/recettes.md) (enchaînements éprouvés),
 [guides/briques.md](guides/briques.md) (toutes les briques et leurs réglages) et
 [guides/motion-design.md](guides/motion-design.md) (principes et scènes libres).
-Catalogue en images : `catalogue/briques-16x9.png`, `briques-9x16.png`, `briques-1x1.png`.
+Catalogue en images : `catalogue/briques-16x9.png`, `briques-9x16.png`, `briques-1x1.png`, `affiches.png`,
+`document.png`.
+
+Une même **charte** (`charte.json`) sert aux vidéos, aux affiches et aux documents : une campagne reste cohérente
+d'un support à l'autre.
 
 ## Avant la première utilisation
 
@@ -44,9 +51,14 @@ Si un Chrome ou Chromium est déjà installé, on peut l'imposer avec `STUDIO_MO
 3. **Vérifier avant de livrer** : vérificateur automatique, puis images-tests regardées (par vous si vous lisez
    les images, sinon par l'utilisateur), puis rendu complet.
 4. **Un rendu à la fois** (`--concurrence 1` par défaut) : les rendus consomment beaucoup de mémoire.
-5. **Musique** : uniquement celle composée par `moteur/outils/musique.mjs` (originale, sans droits de tiers), ou
-   un fichier fourni par l'utilisateur avec sa licence.
+5. **Musique** : celle composée par `moteur/outils/musique.mjs` (originale, sans droits de tiers), celle générée
+   par `moteur/outils/musique-ia.mjs` (ElevenLabs, selon la licence du compte), ou un fichier fourni par
+   l'utilisateur avec sa licence. Une musique différente par vidéo d'une série.
 6. **Langue** : textes à l'écran dans la langue de l'utilisateur, orthographe et accents corrects. Le moteur
    ajoute seul les espaces insécables du français.
 7. **Licence Remotion** : le moteur vidéo utilise Remotion, gratuit pour les particuliers et les structures de
    3 personnes au plus ; au-delà, une licence d'entreprise est nécessaire (remotion.pro).
+8. **Clés d'API** (ElevenLabs…) : uniquement dans des variables d'environnement, jamais dans un fichier du projet,
+   un scénario ou un message.
+9. **Publication** : préparer la légende (guides/publication.md), mais ne rien publier sans l'accord explicite de
+   l'utilisateur.

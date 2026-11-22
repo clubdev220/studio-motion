@@ -127,7 +127,7 @@ body{--u:${Math.min(f.w, f.h) / 1080 * (a.format === '9:16' ? 1.12 : paysage ? 1
 .cadre-deco.b{width:${U(620)};height:${U(620)};right:${U(-240)};top:${U(-240)}}
 .page{position:relative;width:100%;height:100%;padding:${U(haut)} ${U(paysage ? 110 : 80)} ${U(bas)};display:flex;flex-direction:column;gap:${U(36)}}
 .tete{display:flex;align-items:center;justify-content:space-between;gap:${U(24)};flex:none}
-.logo{height:${U(a.tailleLogo || 84)};max-width:${U(420)};object-fit:contain;object-position:left}
+.logo{height:${U(a.tailleLogo || a.charte.tailleLogo || 84)};max-width:${U(420)};object-fit:contain;object-position:left}
 .nom-marque{font-family:var(--police-titres);font-weight:700;font-size:${U(36)};color:var(--titres)}
 .corps{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:${a.alignement === 'haut' ? 'flex-start' : 'center'};gap:${U(34)}}
 .surtitre{align-self:flex-start;font-weight:700;font-size:${U(26)};letter-spacing:.12em;text-transform:uppercase;color:var(--accent);padding:${U(10)} ${U(22)};border:${U(2)} solid var(--accent);border-radius:${U(100)}}

@@ -4,6 +4,7 @@ import { AbsoluteFill, Audio, Img, Sequence, interpolate, useCurrentFrame, useVi
 import { CharteCtx, police, useCharte, type CharteActive } from './charte';
 import { PLEIN_CADRE, trouverBrique } from './briques';
 import { Logo, media, rgb } from './outils';
+import { SousTitres } from './sousTitres';
 import type { Montage as MontageProps, Scene } from './types';
 
 const FONDU = 10;
@@ -76,7 +77,7 @@ const Reperes = ({ chapitres, debut, fin }: { chapitres: { titre: string; start:
   );
 };
 
-export const Montage = ({ charte, scenes, musique, volumeMusique, reperes }: MontageProps) => {
+export const Montage = ({ charte, scenes, musique, volumeMusique, volumeMusiqueVoix, reperes, pisteVoix, sousTitres }: MontageProps) => {
   const active: CharteActive = { c: charte.couleurs, titres: police(charte.polices.titres), texte: police(charte.polices.texte), code: police(charte.polices.code ?? 'JetBrains Mono'), logo: charte.logo, signature: charte.signature };
   const { fps, durationInFrames } = useVideoConfig();
   const starts: number[] = [];
@@ -87,6 +88,18 @@ export const Montage = ({ charte, scenes, musique, volumeMusique, reperes }: Mon
   const debut = starts[Math.max(0, iDebut)] ?? 0;
   const fin = iFin > 0 ? starts[iFin] : durationInFrames / fps;
   const montrer = reperes ?? chapitres.length > 0;
+  // Voix : un morceau par scène parlée ; la musique baisse pendant la voix (0,05 par défaut) et remonte entre deux
+  const voix = pisteVoix?.scenes ?? [];
+  const intervalles = voix.map((v, i) => (v ? [starts[i] + v.decalage, starts[i] + v.decalage + (v.fin - v.debut)] : null)).filter(Boolean) as number[][];
+  const volMus = volumeMusique ?? (pisteVoix ? 0.1 : 0.16), volSous = volumeMusiqueVoix ?? 0.05;
+  const volumeMusiqueA = (f: number) => {
+    const t = f / fps;
+    let k = 0;
+    for (const [a, b] of intervalles) k = Math.max(k, interpolate(t, [a - 0.35, a, b - 0.1, b + 0.5], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }));
+    const fondu = interpolate(f, [0, 30, durationInFrames - 60, durationInFrames], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+    return (volMus + (volSous - volMus) * k) * fondu;
+  };
+  const st = sousTitres ? (sousTitres === true ? {} : sousTitres) : null;
   return (
     <CharteCtx.Provider value={active}>
       <AbsoluteFill style={{ background: charte.couleurs.fond }}>
@@ -107,7 +120,15 @@ export const Montage = ({ charte, scenes, musique, volumeMusique, reperes }: Mon
           );
         })}
         {montrer ? <Reperes chapitres={chapitres} debut={debut} fin={fin} /> : null}
-        {musique ? <Audio src={media(musique)} volume={(f) => (volumeMusique ?? 0.16) * interpolate(f, [0, 30, durationInFrames - 60, durationInFrames], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })} /> : null}
+        {st && pisteVoix ? scenes.map((sc, i) => (voix[i] && sc.sousTitres !== false ? (
+          <Sequence key={`st${i}`} from={Math.round(starts[i] * fps)} durationInFrames={Math.max(1, Math.round(sc.duree * fps))} name={`sous-titres ${i + 1}`}>
+            <SousTitres mots={voix[i]!.mots} reglages={st} />
+          </Sequence>) : null)) : null}
+        {pisteVoix ? voix.map((v, i) => (v ? (
+          <Sequence key={`v${i}`} from={Math.round((starts[i] + v.decalage) * fps)} durationInFrames={Math.max(1, Math.round((v.fin - v.debut) * fps))} name={`voix ${i + 1}`}>
+            <Audio src={media(pisteVoix.src)} trimBefore={Math.round(v.debut * fps)} trimAfter={Math.round(v.fin * fps)} />
+          </Sequence>) : null)) : null}
+        {musique ? <Audio src={media(musique)} loop volume={volumeMusiqueA} /> : null}
       </AbsoluteFill>
     </CharteCtx.Provider>
   );

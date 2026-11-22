@@ -1,0 +1,20 @@
+{
+  "nom": "abdouliatech",
+  "couleurs": {
+    "fond": "#0D0D13",
+    "surface": "#1A1A24",
+    "surfaceSombre": "#14141C",
+    "accent": "#F7941D",
+    "accentClair": "#F7F7F4",
+    "accentProfond": "#9A5208",
+    "texte": "#F7F7F4",
+    "texteSecondaire": "#B9B9C4",
+    "papier": "#F7F7F4",
+    "encre": "#0D0D13"
+  },
+  "polices": {
+    "titres": "Sora",
+    "texte": "Inter"
+  },
+  "signature": "abdouliatech.com"
+}
