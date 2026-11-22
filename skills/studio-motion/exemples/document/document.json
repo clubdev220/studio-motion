@@ -1,0 +1,24 @@
+{
+  "titre": "Guide de l'atelier Maison Verte",
+  "titreCourt": "Maison Verte — guide de l'atelier (exemple fictif)",
+  "charte": "charte.json",
+  "papier": "A4",
+  "blocs": [
+    { "type": "couverture", "surtitre": "Guide pratique", "titre": "Prendre soin de ses plantes *sans stress*", "sousTitre": "Les bons gestes appris en atelier, à garder chez soi.", "auteur": "Maison Verte (exemple fictif)", "date": "Édition 2025" },
+    { "type": "sommaire" },
+    { "type": "section", "titre": "Pourquoi ce guide", "intro": "Nos ateliers attirent chaque mois de nouveaux curieux. Ce guide reprend l'essentiel, pour continuer à la maison." },
+    { "type": "texte", "texte": "La plupart des plantes d'intérieur meurent pour deux raisons : **trop d'eau** et **pas assez de lumière**. Bonne nouvelle : ces deux erreurs se corrigent en quelques minutes par semaine.\n\nCe guide suit l'ordre de l'atelier. Chaque partie se termine par les points à retenir. Les chiffres sont ceux de l'exemple et ne décrivent pas une vraie association." },
+    { "type": "chiffres", "items": [ { "valeur": "1 240", "legende": "plantes adoptées" }, { "valeur": "38", "legende": "ateliers en 2025" }, { "valeur": "96 %", "legende": "de participants satisfaits" } ], "source": "chiffres de l'exemple" },
+    { "type": "citation", "texte": "J'ai enfin compris pourquoi mes plantes jaunissaient.", "auteur": "Participante", "role": "avis de l'exemple" },
+    { "type": "section", "titre": "Les trois gestes de base", "intro": "Arroser, éclairer, rempoter : tout le reste en découle." },
+    { "type": "cartes", "items": [ { "icone": "eclair", "titre": "Arroser juste", "texte": "Quand la terre est sèche sur 2 cm, pas avant." }, { "icone": "etoile", "titre": "Assez de lumière", "texte": "Près d'une fenêtre, sans soleil direct l'après-midi." }, { "icone": "cadeau", "titre": "Un pot qui respire", "texte": "Toujours un trou au fond pour que l'eau s'écoule." } ] },
+    { "type": "titre", "texte": "Rempoter en cinq étapes" },
+    { "type": "etapes", "items": [ { "titre": "Choisir le pot", "texte": "2 à 4 cm de plus que l'ancien, pas davantage." }, { "titre": "Préparer le fond", "texte": "Une couche de billes d'argile pour le drainage." }, { "titre": "Sortir la plante", "texte": "Retourner le pot et tapoter, sans tirer sur la tige." }, { "titre": "Démêler les racines", "texte": "Couper celles qui sont noires ou molles." }, { "titre": "Arroser une fois", "texte": "Puis attendre une semaine avant le prochain arrosage." } ] },
+    { "type": "encadre", "ton": "alerte", "titre": "À éviter", "texte": "Ne rempotez pas une plante en fleurs ni en plein été : attendez le printemps." },
+    { "type": "section", "titre": "Calendrier et budget", "intro": "Ce qu'il faut prévoir pour démarrer avec cinq plantes faciles." },
+    { "type": "tableau", "colonnes": ["Article", "Quantité", "Prix unitaire", "Total"], "alignDroite": [1, 2, 3], "lignes": [ ["Pot en terre cuite", "5", "2 500 FCFA", "12 500 FCFA"], ["Terreau (sac de 10 L)", "2", "3 000 FCFA", "6 000 FCFA"], ["Billes d'argile", "1", "2 000 FCFA", "2 000 FCFA"], ["Plantes faciles", "5", "4 000 FCFA", "20 000 FCFA"], ["Arrosoir", "1", "3 500 FCFA", "3 500 FCFA"] ], "total": ["Total", "", "", "44 000 FCFA"], "legende": "Prix de l'exemple." },
+    { "type": "liste", "puces": "numeros", "points": [ { "titre": "Janvier – février :", "texte": "arrosage réduit, pas d'engrais." }, { "titre": "Mars – avril :", "texte": "rempotage et premier engrais." }, { "titre": "Mai – septembre :", "texte": "arrosage régulier, surveiller les feuilles." }, { "titre": "Octobre – décembre :", "texte": "rentrer les plantes fragiles, espacer les arrosages." } ] },
+    { "type": "image", "image": "images/ambiance-2.svg", "legende": "Illustration de l'exemple.", "hauteur": 70 },
+    { "type": "contact", "titre": "Une question ?", "texte": "L'équipe de l'atelier vous répond.", "items": [ { "icone": "telephone", "texte": "+226 00 00 00 00" }, { "icone": "courriel", "texte": "contact@maisonverte.exemple" }, { "icone": "lieu", "texte": "Rue de l'exemple" } ] }
+  ]
+}

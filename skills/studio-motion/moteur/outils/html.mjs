@@ -64,7 +64,7 @@ export function variablesCss(ch, theme = 'sombre') {
 
 // Texte : échappement, typographie française (espaces fines insécables), *mots* en couleur d'accent, **gras**
 export const echapper = (t) => String(t ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-export const typo = (t) => t.replace(/ ([:;?!»%])/g, '\u202f$1').replace(/« /g, '«\u202f').replace(/(\d)[ \u202f](?=\d{3}\b)/g, '$1\u00a0');
+export const typo = (t) => t.replace(/([A-Za-zÀ-ÿ])'(?=[A-Za-zÀ-ÿ])/g, '$1\u2019').replace(/ ([:;?!»%])/g, '\u202f$1').replace(/« /g, '«\u202f').replace(/(\d)[ \u202f](?=\d{3}\b)/g, '$1\u00a0');
 export function riche(t) {
   if (t == null) return '';
   return typo(echapper(t))
