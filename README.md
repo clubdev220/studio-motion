@@ -20,7 +20,8 @@ OpenClaw, OpenCode, Cursor, Gemini CLI… quel que soit le modèle utilisé (Cla
 | Affiches et visuels réseaux sociaux (PNG 4:5, 1:1, 9:16, 16:9 ; A4/A3 + PDF ; 6 modèles + mise en page libre) | disponible |
 | Documents PDF mis en page (plaquette, guide, rapport : mise en page automatique, sommaire, tableaux) | disponible |
 | Voix off calée au mot (ElevenLabs), sous-titres mot à mot, musique qui baisse sous la voix, son normalisé (-14 LUFS) | disponible |
-| Légendes et hashtags par réseau ; chartes prêtes (abdouliatech, Studio Voix d'Afrique, CO Digitale) | disponible |
+| Charte de l'utilisateur trouvée automatiquement (code du projet ou site web) ou construite à partir de ses réponses, avec aperçu à valider | disponible |
+| Légendes et hashtags par réseau | disponible |
 
 ## Installation
 
@@ -63,7 +64,7 @@ skills/studio-motion/
   guides/affiche.md     affiches et visuels pour les réseaux sociaux
   guides/document.md    documents PDF mis en page
   guides/publication.md légendes et hashtags par réseau
-  chartes/              chartes prêtes : abdouliatech, Studio Voix d'Afrique, CO Digitale
+  guides/charte.md      trouver ou construire la charte de l'utilisateur
   catalogue/            aperçu de toutes les briques en 16:9, 9:16 et 1:1
   preparer.mjs          installe le moteur et le navigateur
   moteur/               moteur de rendu (Remotion) et outils en ligne de commande
@@ -77,6 +78,7 @@ skills/studio-motion/
     outils/musique-ia.mjs musique instrumentale ElevenLabs à la durée de la vidéo
     outils/voix.mjs       voix off ElevenLabs calée au mot (cache : pas de double facturation)
     outils/audio.mjs      ffmpeg, normalisation du son (-14 LUFS)
+    outils/charte.mjs     charte détectée (projet, site) ou construite (couleurs données) + aperçu
     outils/affiche.mjs    affiches (PNG, PDF) à partir d'un modèle et d'une charte
     outils/document.mjs   documents PDF (blocs + charte -> PDF, aperçus des pages)
     outils/html.mjs       socle commun des affiches et documents (charte -> CSS, polices, rendu Chrome)

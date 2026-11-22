@@ -14,12 +14,12 @@ non respectée.
 
 | Demande | Lire d'abord |
 | --- | --- |
+| **Avant toute création** : trouver la charte de l'utilisateur (projet, site, ou questions) | [guides/charte.md](guides/charte.md) |
 | Toute vidéo (tutoriel, promo, explicative, chiffres, annonce, présentation…) | [guides/video.md](guides/video.md) |
 | Affiche, visuel pour réseaux sociaux (4:5, 1:1, 9:16, 16:9, A4/A3 à imprimer) | [guides/affiche.md](guides/affiche.md) |
 | Document PDF mis en page (plaquette, guide, rapport, proposition, fiche) | [guides/document.md](guides/document.md) |
 | Voix off calée au mot, sous-titres, mixage, musique propre à chaque vidéo | [guides/voix.md](guides/voix.md) |
 | Légendes et hashtags pour publier | [guides/publication.md](guides/publication.md) |
-| Chartes prêtes (abdouliatech, Studio Voix d'Afrique, CO Digitale) | [chartes/LISEZMOI.md](chartes/LISEZMOI.md) |
 
 `guides/video.md` renvoie ensuite vers : [guides/recettes.md](guides/recettes.md) (enchaînements éprouvés),
 [guides/briques.md](guides/briques.md) (toutes les briques et leurs réglages) et
@@ -28,7 +28,8 @@ Catalogue en images : `catalogue/briques-16x9.png`, `briques-9x16.png`, `briques
 `document.png`.
 
 Une même **charte** (`charte.json`) sert aux vidéos, aux affiches et aux documents : une campagne reste cohérente
-d'un support à l'autre.
+d'un support à l'autre. Le pack n'embarque aucune charte de marque : **commencez toujours par obtenir celle de
+l'utilisateur** ([guides/charte.md](guides/charte.md)) et faites-la valider.
 
 ## Avant la première utilisation
 

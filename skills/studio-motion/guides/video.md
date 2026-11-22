@@ -59,8 +59,8 @@ mon-projet/
 
 - La vidéo est **sur fond sombre** : `fond` très foncé, `texte` très clair, `accent` = couleur de la marque
   (cadres, puces, boutons), `accentClair` = titres, `accentProfond` = reflets du fond.
-- Reprenez la charte réelle (fichier de jetons CSS, site, logo). À défaut, demandez ; sinon proposez une charte
-  sobre et dites-le.
+- Reprenez la charte réelle de l'utilisateur : `moteur/outils/charte.mjs` la trouve dans son code ou sur son site,
+  ou la construit à partir de ses réponses, avec un aperçu à faire valider (voir [charte.md](charte.md)).
 - Polices : Cormorant Garamond, DM Sans, Fraunces, Inter, JetBrains Mono, Lora, Manrope, Montserrat, Nunito,
   Outfit, Playfair Display, Poppins, Raleway, Sora, Space Grotesk (`polices.code` facultatif pour le code).
   Pour en ajouter une : `moteur/video/src/charte.ts`.

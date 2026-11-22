@@ -55,7 +55,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(im
   const texte = lu.filter(Boolean).join(' ');
   console.log(`Texte lu : ${texte.length} caractères (${motsAffiches(texte).length} mots, ≈ ${Math.round(motsAffiches(texte).length / 2.6 / (v.vitesse || 1))} s).`);
   const suspects = [...new Set(lu.filter(Boolean).flatMap(t => motsAffiches(t)).map(m => m.replace(/^[«"(']+|[»"),.;:!?']+$/g, '')).filter(m => SUSPECTS.test(m)))];
-  if (suspects.length) console.log(`ATTENTION prononciation à vérifier (sigles, nombres, adresses) : ${suspects.join(', ')}\n  → au besoin, ajoutez-les dans « voix.prononciation » écrits comme ils se disent (ex. "CO Digitale": "Si-O Digitale", "2025": "deux mille vingt-cinq").`);
+  if (suspects.length) console.log(`ATTENTION prononciation à vérifier (sigles, nombres, adresses) : ${suspects.join(', ')}\n  → au besoin, ajoutez-les dans « voix.prononciation » écrits comme ils se disent (ex. "IA": "i-a", "2025": "deux mille vingt-cinq").`);
   if (v.traitement === 'clarte' && !ffmpeg().complet) console.log('ATTENTION traitement « clarte » ignoré : le ffmpeg trouvé n\'a pas d\'égaliseur (installez ffmpeg, ou STUDIO_MOTION_FFMPEG=/chemin/ffmpeg).');
   if (opt.essai) process.exit(0);
 
