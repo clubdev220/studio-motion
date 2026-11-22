@@ -1,12 +1,12 @@
 // Ouverture, fermeture et carte de chapitre
-import { AbsoluteFill, useCurrentFrame } from 'remotion';
-import { Filet, Logo, OMBRE, Surtitre, T, ease, useCharte, useEchelle, useRebond } from '../outils';
+import { AbsoluteFill } from 'remotion';
+import { Filet, Logo, OMBRE, Surtitre, T, ease, useCharte, useEchelle, useRebond, useImage } from '../outils';
 
 // intro : logo, surtitre, titre, sous-titre
 export const Intro = ({ surtitre, titre, sousTitre }: { surtitre?: string; titre: string; sousTitre?: string }) => {
   const { c, titres, texte, logo } = useCharte();
   const { u, portrait } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const r = useRebond();
   const l = r(0, 90, 20), ti = r(32, 110, 18);
   return (
@@ -27,7 +27,7 @@ export const Outro = ({ suite, surtitreSuite, signature }: { suite?: string; sur
   const ch = useCharte();
   const { c, titres, texte } = ch;
   const { u } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const l = useRebond()(0, 90, 20);
   const sig = signature ?? ch.signature;
   return (
@@ -49,7 +49,7 @@ export const Outro = ({ suite, surtitreSuite, signature }: { suite?: string; sur
 export const Chapitre = ({ numero, titre, surtitre }: { numero?: number; titre: string; surtitre?: string }) => {
   const { c, titres, logo } = useCharte();
   const { u, portrait } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const s = useRebond()(0, 110, 18);
   return (
     <AbsoluteFill style={{ justifyContent: 'center', padding: `0 ${u(portrait ? 90 : 180)}px` }}>

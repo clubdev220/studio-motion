@@ -29,7 +29,7 @@ laissez pas deviner : écrivez-les comme ils se disent dans `voix.prononciation`
 garde l'orthographe normale ; seul le texte lu change.
 
 ```json
-"prononciation": { "CO Digitale": "Si-O Digitale", "L'AURA": "Laura", "IA": "i-a", "2025": "deux mille vingt-cinq", "monsite.com": "mon site point com" }
+"prononciation": { "NextGen": "Nekst-Djène", "SARL": "S.A.R.L.", "IA": "i-a", "2025": "deux mille vingt-cinq", "monsite.com": "mon site point com" }
 ```
 
 `voix.mjs --essai` liste les mots suspects (sigles, nombres, adresses) avant tout appel payant. Écoutez toujours la
@@ -45,7 +45,7 @@ On ajoute `voix` en haut du scénario, et un texte `voix` dans chaque scène par
   "format": "9:16",
   "charte": "charte.json",
   "musique": "musique.wav",
-  "voix": { "voixId": "IDENTIFIANT_ELEVENLABS", "vitesse": 1.05, "prononciation": { "CO Digitale": "Si-O Digitale" } },
+  "voix": { "voixId": "IDENTIFIANT_ELEVENLABS", "vitesse": 1.05, "prononciation": { "IA": "i-a" } },
   "sousTitres": { "style": "karaoke" },
   "scenes": [
     { "brique": "titre", "texte": "Trois erreurs qui *tuent* vos plantes", "transition": "zoom",

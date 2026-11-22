@@ -19,12 +19,16 @@ export const BRIQUES = {
   ecran: ['image', 'reperes'],
   code: ['code'], terminal: ['commandes'], schema: ['noeuds'],
   libre: ['fichier'],
+  cinetique: [],
 };
 const ICONES = [...readFileSync(path.join(RACINE, 'video/src/outils.tsx'), 'utf8').matchAll(/^\s+(\w+): <(?:path|>|circle|rect)/gm)].map(m => m[1]);
 
 const mots = (s = '') => String(s).replace(/<[^>]+>/g, ' ').replace(/\*/g, '').split(/\s+/).filter(Boolean).length;
-// Temps de lecture calibré sur des tutoriels validés par un client : ~3,3 mots/s + 1,5 s pour situer l'écran
-const lecture = (n) => 1.5 + n / 3.3;
+// Temps de lecture calibré sur des tutoriels validés par un client : ~3,3 mots/s + 1,5 s pour situer l'écran.
+// Les rythmes « dynamique » et « nerveux » (réseaux sociaux) lisent plus vite : textes courts, mots-clés.
+const LECTURE = { pose: [1.5, 3.3, 1], dynamique: [0.9, 3.8, 0.7], nerveux: [0.5, 4.5, 0.45] };
+let RY = 'pose';
+const lecture = (n) => LECTURE[RY][0] + n / LECTURE[RY][1];
 // Tous les textes affichés d'une scène (hors chemins de fichiers et réglages techniques)
 const TECH = new Set(['voix', 'sousTitres', 'brique', 'duree', 'chapitre', 'transition', 'fond', 'fichier', 'image', 'images', 'video', 'focus', 'zoom', 'zone', 'at', 'clic', 'icone', 'style', 'disposition', 'alignement', 'taille', 'cote', 'id', 'de', 'a', 'shell', 'dossier', 'code', 'surligner', 'valeur', 'compteur', 'enAvant', 'debut', 'cadre', 'son', 'defilerDe', 'defilerA', 'active', 'adresse', 'reperes']);
 const textes = (o, cle = '') => {
@@ -65,6 +69,8 @@ export function verifier(fichier) {
   let sc, dossier, dossierCharte;
   try { ({ sc, dossier, dossierCharte } = chargerScenario(fichier)); } catch (e) { return { erreurs: [`Scénario ou charte illisible : ${e.message}`], alertes, duree: 0 }; }
 
+  RY = LECTURE[sc.rythme] ? sc.rythme : 'pose';
+  if (sc.rythme && !LECTURE[sc.rythme]) E('« rythme » doit valoir "pose", "dynamique" ou "nerveux".');
   if (sc._voixErreur) E(sc._voixErreur);
   if (!['16:9', '9:16', '1:1'].includes(sc.format)) E('« format » doit valoir "16:9", "9:16" ou "1:1".');
 
@@ -108,7 +114,10 @@ export function verifier(fichier) {
     if (!BRIQUES[s.brique]) return E(`${nom} : brique inconnue. Choix : ${Object.keys(BRIQUES).join(', ')}.`);
     if (!(s.duree > 0) && !(sc.voix && s.voix)) E(`${nom} : « duree » (secondes) manquante.`);
     for (const r of BRIQUES[s.brique]) if (s[r] === undefined || s[r] === '' || (Array.isArray(s[r]) && !s[r].length)) E(`${nom} : réglage « ${r} » obligatoire.`);
-    if (s.transition && !['fondu', 'glisse', 'zoom', 'coupe'].includes(s.transition)) E(`${nom} : transition inconnue (fondu, glisse, zoom, coupe).`);
+    if (s.transition && !['fondu', 'glisse', 'zoom', 'coupe', 'punch', 'balayage'].includes(s.transition)) E(`${nom} : transition inconnue (fondu, glisse, zoom, coupe, punch, balayage).`);
+    if (s.brique === 'cinetique' && !s.texte && !(sc.voix && s.voix)) E(`${nom} : la brique « cinetique » demande un « texte » ou une « voix ».`);
+    if (s.brique === 'cinetique' && s.style && !['empile', 'impact', 'mot'].includes(s.style)) E(`${nom} : style de « cinetique » inconnu (empile, impact, mot).`);
+    if (RY === 'nerveux' && s.duree > 4.5 && !['ecran', 'video', 'intro', 'outro'].includes(s.brique)) A(`${nom} : ${Number(s.duree).toFixed(1)} s, long pour un rythme nerveux (1 à 3 s par plan) : découpez en plusieurs scènes.`);
     if (s.icone && !ICONES.includes(s.icone)) E(`${nom} : icône « ${s.icone} » inconnue. Choix : ${ICONES.join(', ')}.`);
     parcourirFichiers(s, nom);
     if (s.fond && typeof s.fond === 'object' && s.fond.image) fichierOk(s.fond.image, nom);
@@ -136,7 +145,7 @@ export function verifier(fichier) {
     } else {
       const n = mots(textes(s));
       const base = { galerie: 3 * (s.images?.length || 1), photo: 3, video: 2, intro: 5, outro: 5, chapitre: 2.5 }[s.brique] || 0;
-      const animation = { liste: 0.6 * (s.elements?.length || 0), recap: 0.6 * (s.items?.length || 0), carte: 0.8 * (s.lignes?.length || 0), etapes: 1, frise: 2, barres: 1.5, chiffre: 1.2, schema: 2, code: 2, terminal: 2 }[s.brique] || 0;
+      const animation = LECTURE[RY][2] * ({ liste: 0.6 * (s.elements?.length || 0), recap: 0.6 * (s.items?.length || 0), carte: 0.8 * (s.lignes?.length || 0), etapes: 1, frise: 2, barres: 1.5, chiffre: 1.2, schema: 2, code: 2, terminal: 2 }[s.brique] || 0);
       const besoin = Math.max(base, lecture(n) + animation);
       if (s.duree < besoin - 0.05 && !sc.pisteVoix?.scenes[i]) A(`${nom} : ${s.duree} s pour ${n} mots${animation ? ' et une animation' : ''} ; prévoir au moins ${besoin.toFixed(1)} s.`);
     }

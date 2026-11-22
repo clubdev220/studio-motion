@@ -59,8 +59,8 @@ mon-projet/
 
 - La vidéo est **sur fond sombre** : `fond` très foncé, `texte` très clair, `accent` = couleur de la marque
   (cadres, puces, boutons), `accentClair` = titres, `accentProfond` = reflets du fond.
-- Reprenez la charte réelle (fichier de jetons CSS, site, logo). À défaut, demandez ; sinon proposez une charte
-  sobre et dites-le.
+- Reprenez la charte réelle de l'utilisateur : `moteur/outils/charte.mjs` la trouve dans son code ou sur son site,
+  ou la construit à partir de ses réponses, avec un aperçu à faire valider (voir [charte.md](charte.md)).
 - Polices : Cormorant Garamond, DM Sans, Fraunces, Inter, JetBrains Mono, Lora, Manrope, Montserrat, Nunito,
   Outfit, Playfair Display, Poppins, Raleway, Sora, Space Grotesk (`polices.code` facultatif pour le code).
   Pour en ajouter une : `moteur/video/src/charte.ts`.
@@ -128,10 +128,10 @@ Réglages communs à toutes les scènes :
 | `brique` | nom de la brique, ou `libre` (avec `fichier`) |
 | `duree` | secondes ; les scènes s'enchaînent dans l'ordre |
 | `chapitre` | ouvre un chapitre : pastille en haut à gauche et barre de progression (vidéos longues) |
-| `transition` | `fondu` (défaut), `glisse`, `zoom` ou `coupe` |
+| `transition` | `fondu`, `glisse`, `zoom`, `coupe`, `punch` (zoom-poing) ou `balayage` (bande de couleur) ; par défaut, celles du rythme |
 | `fond` | `charte` (défaut), `uni`, ou `{ "image": "images/fond.jpg", "assombrir": 0.65 }` |
 
-Haut du scénario : `format`, `charte` (fichier ou objet), `musique`, `volumeMusique` (0,16 par défaut),
+Haut du scénario : `format`, `rythme` (`pose` par défaut, `dynamique` ou `nerveux` : voir [rythme.md](rythme.md)), `charte` (fichier ou objet), `musique`, `volumeMusique` (0,16 par défaut),
 `reperes` (`true`/`false` : pastille, logo discret et barre ; par défaut s'il y a des chapitres).
 
 **Écriture** : phrases courtes, une idée par scène, verbes d'action, mêmes mots que l'écran ou le produit. Mettez

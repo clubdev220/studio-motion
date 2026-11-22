@@ -1,0 +1,20 @@
+{
+  "titre": "3 erreurs plantes (nerveux)",
+  "format": "9:16",
+  "rythme": "nerveux",
+  "charte": "charte.json",
+  "musique": "musique.wav",
+  "voix": { "voixId": "REMPLACER_PAR_L_ID_DE_VOTRE_VOIX_ELEVENLABS", "vitesse": 1.1 },
+  "sousTitres": { "style": "pilule" },
+  "scenes": [
+    { "brique": "cinetique", "style": "impact", "texte": "Tes plantes *meurent* ? C'est sûrement *ça*.", "voix": "Tes plantes meurent ? C'est sûrement à cause de ça." },
+    { "brique": "chiffre", "valeur": "3", "legende": "erreurs à éviter", "voix": "Trois erreurs." },
+    { "brique": "cinetique", "style": "empile", "texte": "Erreur 1 : *trop d'eau*", "voix": "Un : trop d'eau." },
+    { "brique": "libre", "fichier": "scenes/Terre.tsx", "voix": "Arrose seulement quand la terre est sèche sur deux centimètres." },
+    { "brique": "cinetique", "style": "mot", "texte": "Deux : *lumière*", "voix": "Deux : pas assez de lumière." },
+    { "brique": "titre", "texte": "Près d'une *fenêtre*, pas en plein soleil", "voix": "Mets-la près d'une fenêtre, mais pas en plein soleil." },
+    { "brique": "cinetique", "style": "impact", "texte": "Trois : un pot *sans trou*", "voix": "Trois : un pot sans trou." },
+    { "brique": "titre", "texte": "L'eau doit *s'écouler*", "voix": "L'eau doit pouvoir s'écouler, sinon les racines pourrissent." },
+    { "brique": "appel", "titre": "*Enregistre* la vidéo", "bouton": "Enregistrer", "icone": "etoile", "voix": "Enregistre la vidéo pour la prochaine fois." }
+  ]
+}

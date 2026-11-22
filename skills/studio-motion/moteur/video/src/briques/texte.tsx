@@ -1,12 +1,12 @@
 // Briques de texte : titre animé, citation, carte de conseil, appel à l'action
-import { AbsoluteFill, useCurrentFrame } from 'remotion';
-import { Accent, Icone, OMBRE, PastilleIcone, Surtitre, T, ease, typo, useCharte, useEchelle, useRebond, type NomIcone } from '../outils';
+import { AbsoluteFill } from 'remotion';
+import { Accent, Icone, OMBRE, PastilleIcone, Surtitre, T, ease, typo, useCharte, useEchelle, useRebond, type NomIcone, useImage } from '../outils';
 
 // titre : grande phrase qui apparaît mot à mot ; *mots* en couleur d'accent
 export const Titre = ({ texte, surtitre, sousTexte, alignement = 'centre', taille = 'grand' }: { texte: string; surtitre?: string; sousTexte?: string; alignement?: 'centre' | 'gauche'; taille?: 'grand' | 'moyen' | 'geant' }) => {
   const { c, titres, texte: police } = useCharte();
   const { u, portrait } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const fs = { moyen: 72, grand: 100, geant: 140 }[taille] * (portrait ? 1.05 : 1);
   const n = texte.split(/\s+/).length;
   const gauche = alignement === 'gauche';
@@ -23,7 +23,7 @@ export const Titre = ({ texte, surtitre, sousTexte, alignement = 'centre', taill
 export const Citation = ({ texte, auteur, role }: { texte: string; auteur?: string; role?: string }) => {
   const { c, titres, texte: police } = useCharte();
   const { u, portrait } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   return (
     <AbsoluteFill style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: `0 ${u(portrait ? 90 : 220)}px` }}>
       <div style={{ fontFamily: titres, fontSize: u(240), lineHeight: 0.6, height: u(120), color: c.accent, opacity: ease(frame, 0, 10, 0, 1) }}>“</div>
@@ -66,7 +66,7 @@ export const Carte = ({ icone = 'info', titre, lignes }: { icone?: NomIcone; tit
 export const Appel = ({ titre, bouton, icone = 'fleche', details = [], surtitre }: { titre: string; bouton?: string; icone?: NomIcone; details?: { icone?: NomIcone; texte: string }[]; surtitre?: string }) => {
   const { c, titres, texte } = useCharte();
   const { u, portrait } = useEchelle();
-  const frame = useCurrentFrame();
+  const frame = useImage();
   const r = useRebond();
   const b = r(24, 140, 12);
   const pulse = 1 + 0.035 * Math.sin(Math.max(0, frame - 40) / 7);

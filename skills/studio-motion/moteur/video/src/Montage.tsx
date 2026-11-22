@@ -5,9 +5,10 @@ import { CharteCtx, police, useCharte, type CharteActive } from './charte';
 import { PLEIN_CADRE, trouverBrique } from './briques';
 import { Logo, media, rgb } from './outils';
 import { SousTitres } from './sousTitres';
+import { RYTHMES, RythmeCtx } from './rythme';
+import { VoixCtx } from './outils';
 import type { Montage as MontageProps, Scene } from './types';
 
-const FONDU = 10;
 
 const FondCharte = () => {
   const { c } = useCharte();
@@ -28,14 +29,29 @@ const FondScene = ({ fond }: { fond: Scene['fond'] }) => {
   );
 };
 
-// Entrée et sortie de chaque scène
-const Transition = ({ duree, type, children }: { duree: number; type: Scene['transition']; children: React.ReactNode }) => {
+// Entrée et sortie de chaque scène ; « respiration » = zoom lent continu (rythmes dynamique et nerveux)
+const Transition = ({ duree, type, fondu, respiration, sens, children }: { duree: number; type: Scene['transition']; fondu: number; respiration: number; sens: number; children: React.ReactNode }) => {
   const frame = useCurrentFrame();
   const { width } = useVideoConfig();
-  if (type === 'coupe') return <AbsoluteFill>{children}</AbsoluteFill>;
-  const o = interpolate(frame, [0, FONDU, duree - FONDU, duree], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const entree = interpolate(frame, [0, FONDU + 4], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  const tr = type === 'glisse' ? `translateX(${entree * width * 0.08}px)` : type === 'zoom' ? `scale(${1 + entree * 0.08})` : undefined;
+  const { c } = useCharte();
+  const resp = respiration ? 1 + respiration * (sens > 0 ? frame / duree : 1 - frame / duree) : 1;
+  if (type === 'coupe') return <AbsoluteFill style={{ transform: `scale(${resp})` }}>{children}</AbsoluteFill>;
+  if (type === 'punch') {
+    const k = interpolate(frame, [0, 7], [1.14, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: (t) => 1 - (1 - t) ** 3 });
+    return <AbsoluteFill style={{ transform: `scale(${k * resp})` }}>{children}</AbsoluteFill>;
+  }
+  if (type === 'balayage') {
+    const x = interpolate(frame, [0, 12], [-1.2, 1.2], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: (t) => t * t * (3 - 2 * t) });
+    return (
+      <AbsoluteFill>
+        <AbsoluteFill style={{ opacity: frame >= 6 ? 1 : 0, transform: `scale(${resp})` }}>{children}</AbsoluteFill>
+        {frame < 13 ? <AbsoluteFill style={{ background: c.accent, transform: `translateX(${x * width}px) skewX(-12deg)` }} /> : null}
+      </AbsoluteFill>
+    );
+  }
+  const o = interpolate(frame, [0, fondu, duree - fondu, duree], [0, 1, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const entree = interpolate(frame, [0, fondu + 4], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const tr = type === 'glisse' ? `translateX(${entree * width * 0.08}px) scale(${resp})` : type === 'zoom' ? `scale(${(1 + entree * 0.08) * resp})` : `scale(${resp})`;
   return <AbsoluteFill style={{ opacity: o, transform: tr }}>{children}</AbsoluteFill>;
 };
 
@@ -77,7 +93,9 @@ const Reperes = ({ chapitres, debut, fin }: { chapitres: { titre: string; start:
   );
 };
 
-export const Montage = ({ charte, scenes, musique, volumeMusique, volumeMusiqueVoix, reperes, pisteVoix, sousTitres }: MontageProps) => {
+export const Montage = ({ charte, scenes, musique, volumeMusique, volumeMusiqueVoix, reperes, pisteVoix, sousTitres, rythme: nomRythme }: MontageProps) => {
+  const rythme = RYTHMES[nomRythme ?? 'pose'] ?? RYTHMES.pose;
+  const FONDU = rythme.fondu;
   const active: CharteActive = { c: charte.couleurs, titres: police(charte.polices.titres), texte: police(charte.polices.texte), code: police(charte.polices.code ?? 'JetBrains Mono'), logo: charte.logo, signature: charte.signature };
   const { fps, durationInFrames } = useVideoConfig();
   const starts: number[] = [];
@@ -101,26 +119,30 @@ export const Montage = ({ charte, scenes, musique, volumeMusique, volumeMusiqueV
   };
   const st = sousTitres ? (sousTitres === true ? {} : sousTitres) : null;
   return (
-    <CharteCtx.Provider value={active}>
+    <CharteCtx.Provider value={active}><RythmeCtx.Provider value={rythme}>
       <AbsoluteFill style={{ background: charte.couleurs.fond }}>
         <FondCharte />
         {scenes.map((sc, i) => {
           const from = Math.round(starts[i] * fps);
           const to = i === scenes.length - 1 ? durationInFrames : Math.round((starts[i] + sc.duree) * fps);
-          const d = Math.max(1, to - from + (sc.transition === 'coupe' ? 0 : FONDU));
-          const { brique, duree: _d, chapitre: _c, transition, fond, ...reglages } = sc;
+          const { brique, duree: _d, chapitre: _c, transition: tr0, fond, voix: _v, sousTitres: _s, ...reglages } = sc;
+          const transition = (tr0 ?? (i === 0 && rythme.nom === 'pose' ? 'fondu' : rythme.transitions[i % rythme.transitions.length])) as Scene['transition'];
+          const respiration = PLEIN_CADRE.has(brique) || brique === 'ecran' ? 0 : rythme.respiration;
+          const d = Math.max(1, to - from + (['coupe', 'punch', 'balayage'].includes(transition as string) ? 0 : FONDU));
           const Comp = trouverBrique(brique, brique === 'libre' ? (sc.fichier as string) : undefined);
           return (
             <Sequence key={i} from={from} durationInFrames={d} name={`${i + 1}. ${brique}`}>
-              <Transition duree={d} type={transition}>
+              <VoixCtx.Provider value={voix[i]?.mots ?? []}>
+              <Transition duree={d} type={transition} fondu={FONDU} respiration={respiration} sens={i % 2 ? -1 : 1}>
                 {PLEIN_CADRE.has(brique) ? null : <FondScene fond={fond} />}
                 {Comp ? <Comp {...reglages} /> : <Introuvable nom={brique} />}
               </Transition>
+              </VoixCtx.Provider>
             </Sequence>
           );
         })}
         {montrer ? <Reperes chapitres={chapitres} debut={debut} fin={fin} /> : null}
-        {st && pisteVoix ? scenes.map((sc, i) => (voix[i] && sc.sousTitres !== false ? (
+        {st && pisteVoix ? scenes.map((sc, i) => (voix[i] && sc.sousTitres !== false && sc.brique !== 'cinetique' ? (
           <Sequence key={`st${i}`} from={Math.round(starts[i] * fps)} durationInFrames={Math.max(1, Math.round(sc.duree * fps))} name={`sous-titres ${i + 1}`}>
             <SousTitres mots={voix[i]!.mots} reglages={st} />
           </Sequence>) : null)) : null}
@@ -130,6 +152,6 @@ export const Montage = ({ charte, scenes, musique, volumeMusique, volumeMusiqueV
           </Sequence>) : null)) : null}
         {musique ? <Audio src={media(musique)} loop volume={volumeMusiqueA} /> : null}
       </AbsoluteFill>
-    </CharteCtx.Provider>
+    </RythmeCtx.Provider></CharteCtx.Provider>
   );
 };

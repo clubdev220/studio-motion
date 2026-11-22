@@ -64,7 +64,10 @@ export default function Anneaux({ mot, phrase }: { mot: string; phrase?: string 
 | --- | --- |
 | `useCharte()` | `{ c, titres, texte, code, logo, signature }` ; `c` = couleurs (`fond`, `surface`, `surfaceSombre`, `accent`, `accentClair`, `accentProfond`, `texte`, `texteSecondaire`) |
 | `useEchelle()` | `{ u, width, height, portrait, carre, paysage }` ; dimensionnez tout avec `u()` |
-| `useRebond()` | `r(debut, raideur = 120, amorti = 18)` → 0 à 1 avec rebond |
+| `useRebond()` | `r(debut, raideur = 120, amorti = 18)` → 0 à 1 avec rebond (accéléré selon le rythme) |
+| `useVoix()` | `{ mots, trouve("mot"), image(i), ressort(i), actuel, avecVoix }` : caler une animation sur un mot de la voix off (voir [rythme.md](rythme.md#4-sortir-du-cadre--scènes-libres-calées-sur-la-voix)) |
+| `useRythme()` | `{ nom, vitesse, respiration, pas }` : adapter une scène libre au rythme choisi |
+| `useImage()` | image en cours accélérée selon le rythme (pour des entrées plus vives en `dynamique` et `nerveux`) |
 | `ease(frame, a, b, de, vers)` | transition douce entre les images a et b |
 | `Accent` | texte mot à mot, `*mots*` en couleur d'accent (`texte`, `style`, `delai`, `pas`, `align`) |
 | `T` | texte avec typographie française (`<T>{texte}</T>`) |
