@@ -1,0 +1,16 @@
+{
+  "nom": "Atelier Démo",
+  "couleurs": {
+    "fond": "#12151c",
+    "surface": "#1d2230",
+    "surfaceSombre": "#161a24",
+    "accent": "#5b8cff",
+    "accentClair": "#dde7ff",
+    "accentProfond": "#2c4fb3",
+    "texte": "#eef1f6",
+    "texteSecondaire": "#b3bccc"
+  },
+  "polices": { "titres": "Sora", "texte": "Inter" },
+  "logo": "logo-demo.svg",
+  "signature": "Une question ? L'équipe Atelier Démo vous répond."
+}

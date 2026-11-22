@@ -1,0 +1,6 @@
+node_modules/
+*.mp4
+skills/studio-motion/exemples/*/musique.wav
+skills/studio-motion/moteur/video/src/libre/projet/
+.DS_Store
+.remotion/

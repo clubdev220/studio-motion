@@ -1,0 +1,15 @@
+{
+  "nom": "Maison Verte (démo)",
+  "couleurs": {
+    "fond": "#132520",
+    "surface": "#1d3630",
+    "surfaceSombre": "#172c27",
+    "accent": "#e0a458",
+    "accentClair": "#f6e7cf",
+    "accentProfond": "#2f5d50",
+    "texte": "#f1ece4",
+    "texteSecondaire": "#c3cbc2"
+  },
+  "polices": { "titres": "Fraunces", "texte": "DM Sans" },
+  "signature": "Maison Verte — exemple fictif"
+}

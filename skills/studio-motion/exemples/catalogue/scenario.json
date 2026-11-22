@@ -1,0 +1,28 @@
+{
+  "titre": "Catalogue des briques (toutes les briques avec des valeurs d'exemple)",
+  "format": "16:9",
+  "charte": "charte.json",
+  "reperes": false,
+  "scenes": [
+    { "brique": "intro", "duree": 5.5, "surtitre": "Catalogue", "titre": "Les briques", "sousTitre": "Toutes les animations disponibles" },
+    { "brique": "chapitre", "duree": 3, "numero": 2, "titre": "Un chapitre" },
+    { "brique": "titre", "duree": 5.2, "surtitre": "Titre", "texte": "Une phrase forte avec un *mot clé*", "sousTexte": "Et un sous-texte facultatif." },
+    { "brique": "citation", "duree": 6, "texte": "Une citation réelle, fournie par le client, jamais inventée.", "auteur": "Nom de l'auteur", "role": "Fonction" },
+    { "brique": "carte", "duree": 9, "icone": "alerte", "titre": "Carte de conseil", "lignes": ["Première ligne de conseil.", "Deuxième ligne.", "Troisième ligne."] },
+    { "brique": "appel", "duree": 5.5, "titre": "Appel à *l'action*", "bouton": "Nous écrire", "icone": "message", "details": [{ "icone": "telephone", "texte": "+00 00 00 00 00" }, { "icone": "lieu", "texte": "Adresse fournie" }] },
+    { "brique": "chiffre", "duree": 6, "surtitre": "Chiffre clé", "valeur": "12 500", "legende": "une valeur qui défile", "source": "fournie par le client" },
+    { "brique": "barres", "duree": 6, "titre": "Graphique en barres", "unite": "%", "donnees": [{ "libelle": "Option A", "valeur": 72, "enAvant": true }, { "libelle": "Option B", "valeur": 45 }, { "libelle": "Option C", "valeur": 28 }] },
+    { "brique": "frise", "duree": 7, "titre": "Frise", "etapes": [{ "date": "2022", "libelle": "Création" }, { "date": "2024", "libelle": "Première boutique" }, { "date": "2026", "libelle": "Vente en ligne" }] },
+    { "brique": "liste", "duree": 7, "titre": "Liste", "style": "numeros", "elements": ["Premier point", { "texte": "Deuxième point", "detail": "avec un détail" }, "Troisième point"] },
+    { "brique": "etapes", "duree": 6, "titre": "Étapes", "etapes": ["Préparer", "Créer", "Publier", "Partager"], "active": 2 },
+    { "brique": "recap", "duree": 7, "titre": "Récapitulatif", "items": ["Premier point", "Un mot en <b>gras</b>", "Troisième point"] },
+    { "brique": "photo", "duree": 6, "image": "photo.svg", "titre": "Photo plein cadre", "texte": "Lent zoom, titre et texte en bas.", "credit": "Crédit de la photo" },
+    { "brique": "produit", "duree": 8, "image": "photo.svg", "nom": "Fiche produit", "accroche": "Photo, nom, points forts, prix fourni.", "points": ["Point fort 1", "Point fort 2"], "prix": "00 000 FCFA" },
+    { "brique": "telephone", "duree": 6, "image": "mobile.png", "defilerA": 0.2, "titre": "Téléphone", "texte": "Une capture d'application dans un téléphone." },
+    { "brique": "ecran", "duree": 8, "image": "ecran.png", "adresse": "gestion.exemple.org", "reperes": [{ "at": 0, "zoom": { "x": 0.55, "y": 0, "w": 0.45, "h": 0.4 }, "zone": { "x": 0.856, "y": 0.027, "w": 0.124, "h": 0.046 }, "clic": true, "titre": "Écran de tutoriel", "texte": "Capture, zoom, cadre, curseur et explication." }] },
+    { "brique": "code", "duree": 7, "fichier": "exemple.js", "code": "const total = prix * quantite;\nif (codePromo) {\n  total = total * 0.9;\n}\nreturn total;", "surligner": [2], "annotations": [{ "ligne": 2, "texte": "remise de 10 %" }] },
+    { "brique": "terminal", "duree": 6, "commandes": ["npm install", "npm run build"], "sortie": ["Build terminé."] },
+    { "brique": "schema", "duree": 7, "titre": "Schéma", "disposition": "chaine", "noeuds": [{ "id": "a", "libelle": "Commande" }, { "id": "b", "libelle": "Paiement" }, { "id": "c", "libelle": "Livraison" }], "liens": [{ "de": "a", "a": "b" }, { "de": "b", "a": "c" }] },
+    { "brique": "outro", "duree": 6, "suite": "Votre prochaine vidéo" }
+  ]
+}

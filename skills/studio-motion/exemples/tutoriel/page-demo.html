@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier Démo — Espace de gestion</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px system-ui, sans-serif; color: #1f2430; background: #f6f7f9; display: flex; height: 900px; }
+  nav { width: 220px; background: #fff; border-right: 1px solid #e5e7eb; padding: 18px 12px; display: flex; flex-direction: column; gap: 4px; }
+  nav .logo { font-weight: 700; font-size: 17px; padding: 6px 10px 18px; }
+  nav a { padding: 9px 12px; border-radius: 8px; color: #4b5563; text-decoration: none; }
+  nav a.actif { background: #eef2ff; color: #3446c8; font-weight: 600; }
+  nav .bas { margin-top: auto; padding: 10px 12px; border-top: 1px solid #e5e7eb; color: #4b5563; }
+  main { flex: 1; padding: 26px 32px; }
+  .entete { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  h1 { margin: 0; font-size: 24px; }
+  .btn { background: #3446c8; color: #fff; border: 0; border-radius: 8px; padding: 10px 18px; font: 600 15px system-ui; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 22px; }
+  .carte { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px; }
+  .carte b { display: block; font-size: 26px; margin-top: 6px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; }
+  th, td { text-align: left; padding: 13px 16px; border-bottom: 1px solid #eef0f3; }
+  th { color: #6b7280; font-weight: 600; font-size: 13px; background: #fafbfc; }
+  .pastille { padding: 3px 10px; border-radius: 99px; font-size: 13px; }
+  .ok { background: #e7f7ee; color: #1a7f45; } .att { background: #fff4e0; color: #a2620b; }
+  @media (max-width: 600px) {
+    body { flex-direction: column; height: auto; }
+    nav { width: auto; flex-direction: row; flex-wrap: wrap; border-right: 0; border-bottom: 1px solid #e5e7eb; }
+    nav .bas { display: none; }
+    main { padding: 18px; }
+    .entete { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .stats { grid-template-columns: 1fr; }
+    th:nth-child(2), td:nth-child(2), th:nth-child(4), td:nth-child(4) { display: none; }
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Atelier Démo</div>
+    <a class="actif" href="#">Tableau de bord</a>
+    <a href="#">Articles</a>
+    <a href="#">Rendez-vous</a>
+    <a href="#">Réglages</a>
+    <div class="bas">compte@exemple.org</div>
+  </nav>
+  <main>
+    <div class="entete"><h1>Tableau de bord</h1><button class="btn">+ Nouvel article</button></div>
+    <div class="stats">
+      <div class="carte">Articles en ligne<b>12</b></div>
+      <div class="carte">Rendez-vous cette semaine<b>5</b></div>
+      <div class="carte">Messages à lire<b>3</b></div>
+    </div>
+    <table>
+      <tr><th>Article</th><th>Catégorie</th><th>Statut</th><th>Mis à jour</th></tr>
+      <tr><td>Article d'exemple A</td><td>Catégorie 1</td><td><span class="pastille ok">En ligne</span></td><td>Aujourd'hui</td></tr>
+      <tr><td>Article d'exemple B</td><td>Catégorie 2</td><td><span class="pastille att">Brouillon</span></td><td>Hier</td></tr>
+      <tr><td>Article d'exemple C</td><td>Catégorie 1</td><td><span class="pastille ok">En ligne</span></td><td>Il y a 3 jours</td></tr>
+      <tr><td>Article d'exemple D</td><td>Catégorie 3</td><td><span class="pastille ok">En ligne</span></td><td>Il y a 5 jours</td></tr>
+    </table>
+  </main>
+</body>
+</html>

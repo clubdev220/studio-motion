@@ -1,0 +1,89 @@
+{
+  "titre": "Promo verticale (exemple sans capture d'écran)",
+  "format": "9:16",
+  "charte": "charte.json",
+  "musique": "musique.wav",
+  "scenes": [
+    {
+      "brique": "titre",
+      "duree": 4,
+      "surtitre": "Nouveauté",
+      "texte": "Le mug qui garde votre thé *chaud*",
+      "transition": "zoom"
+    },
+    {
+      "brique": "produit",
+      "duree": 8.5,
+      "image": "images/produit.svg",
+      "nom": "Mug Forêt",
+      "accroche": "Céramique émaillée, faite à la main.",
+      "points": [
+        "Garde la chaleur",
+        "Passe au lave-vaisselle",
+        {
+          "texte": "Fabriqué localement",
+          "icone": "lieu"
+        }
+      ],
+      "prix": "12 500 FCFA",
+      "mention": "prix de l'exemple"
+    },
+    {
+      "brique": "libre",
+      "fichier": "scenes/Anneaux.tsx",
+      "duree": 4.5,
+      "mot": "45 min",
+      "phrase": "de chaleur, *testé* à l'atelier"
+    },
+    {
+      "brique": "galerie",
+      "duree": 9,
+      "images": [
+        "images/ambiance-1.svg",
+        "images/ambiance-2.svg",
+        "images/ambiance-3.svg"
+      ],
+      "titre": "Trois couleurs",
+      "texte": "Forêt, Terre et Sauge."
+    },
+    {
+      "brique": "liste",
+      "duree": 8,
+      "titre": "Pourquoi vous allez l'adorer",
+      "style": "icones",
+      "elements": [
+        {
+          "texte": "Tient bien en main",
+          "icone": "coeur"
+        },
+        {
+          "texte": "Livré emballé cadeau",
+          "icone": "cadeau"
+        },
+        {
+          "texte": "Commande en 2 minutes",
+          "icone": "eclair"
+        }
+      ]
+    },
+    {
+      "brique": "chiffre",
+      "duree": 4,
+      "valeur": "4,9/5",
+      "legende": "note moyenne de l'exemple"
+    },
+    {
+      "brique": "appel",
+      "duree": 6,
+      "titre": "Commandez le *vôtre*",
+      "bouton": "Écrire sur WhatsApp",
+      "icone": "message",
+      "details": [
+        {
+          "icone": "lieu",
+          "texte": "Retrait à l'atelier"
+        }
+      ]
+    }
+  ]
+}

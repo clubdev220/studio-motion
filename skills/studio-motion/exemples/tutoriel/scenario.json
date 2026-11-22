@@ -1,0 +1,110 @@
+{
+  "titre": "Découvrir l'espace de gestion",
+  "format": "16:9",
+  "charte": "charte.json",
+  "musique": "musique.wav",
+  "scenes": [
+    {
+      "brique": "intro",
+      "duree": 5.5,
+      "surtitre": "Tutoriel 1",
+      "titre": "L'espace de gestion",
+      "sousTitre": "Un premier tour en une minute"
+    },
+    {
+      "brique": "ecran",
+      "duree": 25.5,
+      "chapitre": "Le tableau de bord",
+      "adresse": "gestion.exemple.org",
+      "reperes": [
+        {
+          "at": 0,
+          "titre": "Le tableau de bord",
+          "texte": "C'est la première page après la connexion. Les menus sont à gauche."
+        },
+        {
+          "at": 6.5,
+          "zoom": {
+            "x": 0.15,
+            "y": 0,
+            "w": 0.85,
+            "h": 0.4
+          },
+          "zone": {
+            "x": 0.175,
+            "y": 0.094,
+            "w": 0.803,
+            "h": 0.1
+          },
+          "titre": "Les chiffres du jour",
+          "texte": "Articles en ligne, rendez-vous de la semaine et messages à lire."
+        },
+        {
+          "at": 13,
+          "zoom": {
+            "x": 0.4,
+            "y": 0.15,
+            "w": 0.6,
+            "h": 0.4
+          },
+          "zone": {
+            "x": 0.626,
+            "y": 0.27,
+            "w": 0.074,
+            "h": 0.19
+          },
+          "titre": "Le statut",
+          "texte": "En ligne : visible par vos clients. Brouillon : caché."
+        },
+        {
+          "at": 19.5,
+          "zoom": {
+            "x": 0.55,
+            "y": 0,
+            "w": 0.45,
+            "h": 0.4
+          },
+          "zone": {
+            "x": 0.856,
+            "y": 0.027,
+            "w": 0.124,
+            "h": 0.046
+          },
+          "clic": true,
+          "titre": "Ajouter un article",
+          "texte": "Le bouton en haut à droite."
+        }
+      ],
+      "image": "captures/tableau-de-bord.png"
+    },
+    {
+      "brique": "carte",
+      "duree": 12.5,
+      "chapitre": "Bon à savoir",
+      "icone": "info",
+      "titre": "Bon à savoir",
+      "lignes": [
+        "Un brouillon n'est jamais visible par vos clients.",
+        "Vos changements sont enregistrés tout de suite.",
+        "En cas de doute, demandez à votre équipe."
+      ]
+    },
+    {
+      "brique": "recap",
+      "duree": 10.0,
+      "chapitre": "À retenir",
+      "titre": "L'espace de gestion",
+      "items": [
+        "Les menus : à gauche",
+        "Les chiffres du jour : en haut",
+        "Nouvel article : <b>+ Nouvel article</b>"
+      ]
+    },
+    {
+      "brique": "outro",
+      "duree": 6.0,
+      "suite": "Créer un article",
+      "surtitreSuite": "Prochain tutoriel"
+    }
+  ]
+}
