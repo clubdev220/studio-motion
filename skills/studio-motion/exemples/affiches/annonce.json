@@ -1,0 +1,21 @@
+{
+  "modele": "annonce",
+  "format": "16:9",
+  "charte": "charte.json",
+  "surtitre": "Ouverture",
+  "titre": "La boutique ouvre *samedi*",
+  "sousTitre": "Plantes, pots et conseils, au cœur du quartier.",
+  "image": "images/ambiance-2.svg",
+  "infos": [
+    {
+      "icone": "calendrier",
+      "texte": "Samedi 6 décembre"
+    },
+    {
+      "icone": "lieu",
+      "texte": "Rue de l’exemple"
+    }
+  ],
+  "appel": "Venez nous voir",
+  "iconeAppel": "fleche"
+}

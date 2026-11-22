@@ -1,0 +1,23 @@
+{
+  "modele": "liste",
+  "format": "9:16",
+  "charte": "charte.json",
+  "surtitre": "Astuce",
+  "titre": "3 erreurs qui *tuent* vos plantes",
+  "points": [
+    {
+      "titre": "Trop d’eau",
+      "texte": "Arrosez quand la terre est sèche sur 2 cm."
+    },
+    {
+      "titre": "Pas assez de lumière",
+      "texte": "Près d’une fenêtre, sans soleil direct."
+    },
+    {
+      "titre": "Un pot sans trou",
+      "texte": "L’eau doit pouvoir s’écouler."
+    }
+  ],
+  "appel": "Enregistre ce post",
+  "iconeAppel": "etoile"
+}

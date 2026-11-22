@@ -1,0 +1,14 @@
+<!-- Modèle « libre » : votre propre mise en page. Variables : --fond --surface --texte --texteSecondaire --titres --accent --accentFort --accentDoux --filet --u (1 unité = 1 px en 1080) ; classes reprises : titre, surtitre, bouton, em.a -->
+<style>
+  .grille{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);opacity:.5}
+  .grille i{border-left:calc(var(--u)*1.5) solid var(--filet)}
+  .bloc{position:relative;margin:auto 0;display:flex;flex-direction:column;gap:calc(var(--u)*40)}
+  .gros{font-family:var(--police-titres);font-weight:700;font-size:calc(var(--u)*210);line-height:.9;color:var(--titres)}
+</style>
+<div class="grille"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="bloc">
+  <div class="surtitre">Nouvelle collection</div>
+  <div class="gros">Vert<br><em class="a">tendre</em></div>
+  <p class="sous-titre">Douze plantes faciles pour débuter, livrées avec leur pot.</p>
+  <div class="bouton">Découvrir</div>
+</div>

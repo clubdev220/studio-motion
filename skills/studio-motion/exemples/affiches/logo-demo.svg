@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+  <title>Atelier Démo</title>
+  <circle cx="60" cy="60" r="44" fill="none" stroke="#9db8ff" stroke-width="6"/>
+  <path d="M38 78 L60 38 L82 78" fill="none" stroke="#dde7ff" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="122" y="58" font-family="Georgia, serif" font-size="40" fill="#dde7ff">Atelier</text>
+  <text x="124" y="96" font-family="Georgia, serif" font-size="30" fill="#9db8ff" letter-spacing="6">DÉMO</text>
+</svg>

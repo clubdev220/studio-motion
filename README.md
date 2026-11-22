@@ -17,7 +17,7 @@ OpenClaw, OpenCode, Cursor, Gemini CLI… quel que soit le modèle utilisé (Cla
 | Capacité | État |
 | --- | --- |
 | Vidéos (MP4 16:9, 9:16, 1:1 ; 22 briques, recettes, scènes libres, musique originale) | disponible |
-| Affiche, visuel réseaux sociaux | à venir |
+| Affiches et visuels réseaux sociaux (PNG 4:5, 1:1, 9:16, 16:9 ; A4/A3 + PDF ; 6 modèles + mise en page libre) | disponible |
 | Document PDF mis en page | à venir |
 
 ## Installation
@@ -65,7 +65,8 @@ skills/studio-motion/
     outils/cadrer.mjs     mise au format 16:10
     outils/capturer.mjs   capture d'une page web (avec masquage de données)
     outils/musique.mjs    musique d'ambiance originale (6 styles)
-  exemples/            tutoriel (16:9), promo-verticale (9:16, scène libre), catalogue (toutes les briques)
+  exemples/            tutoriel (16:9), promo-verticale (9:16, scène libre), catalogue (toutes les briques),
+                       affiches (un exemple par modèle)
 ```
 
 Essai rapide :

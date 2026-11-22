@@ -1,0 +1,42 @@
+{
+  "modele": "evenement",
+  "format": "4:5",
+  "charte": "charte.json",
+  "surtitre": "Atelier gratuit",
+  "jour": "14",
+  "mois": "déc.",
+  "titre": "Rempoter sans *stress*",
+  "sousTitre": "Deux heures pour apprendre les bons gestes, plantes fournies.",
+  "programme": [
+    {
+      "heure": "9 h 00",
+      "texte": "Accueil et café"
+    },
+    {
+      "heure": "9 h 30",
+      "texte": "Choisir le pot et la terre"
+    },
+    {
+      "heure": "10 h 30",
+      "texte": "Rempotage en pratique"
+    }
+  ],
+  "infos": [
+    {
+      "icone": "lieu",
+      "texte": "Atelier Maison Verte"
+    },
+    {
+      "icone": "horloge",
+      "texte": "9 h – 11 h"
+    }
+  ],
+  "appel": "Je m’inscris",
+  "iconeAppel": "fleche",
+  "contact": [
+    {
+      "icone": "telephone",
+      "texte": "+226 00 00 00 00"
+    }
+  ]
+}

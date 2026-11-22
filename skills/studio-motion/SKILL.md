@@ -15,7 +15,7 @@ non respectée.
 | Demande | Lire d'abord |
 | --- | --- |
 | Toute vidéo (tutoriel, promo, explicative, chiffres, annonce, présentation…) | [guides/video.md](guides/video.md) |
-| Affiche, visuel pour réseaux sociaux | à venir |
+| Affiche, visuel pour réseaux sociaux (4:5, 1:1, 9:16, 16:9, A4/A3 à imprimer) | [guides/affiche.md](guides/affiche.md) |
 | Document PDF mis en page (guide, rapport) | à venir |
 
 `guides/video.md` renvoie ensuite vers : [guides/recettes.md](guides/recettes.md) (enchaînements éprouvés),

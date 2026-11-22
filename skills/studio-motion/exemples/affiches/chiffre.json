@@ -1,0 +1,19 @@
+{
+  "modele": "chiffre",
+  "format": "1:1",
+  "charte": "charte.json",
+  "surtitre": "Bilan 2025",
+  "chiffre": "1 240",
+  "legende": "plantes adoptées dans nos ateliers cette année",
+  "autres": [
+    {
+      "chiffre": "38",
+      "legende": "ateliers"
+    },
+    {
+      "chiffre": "96 %",
+      "legende": "de participants satisfaits"
+    }
+  ],
+  "source": "chiffres de l’exemple"
+}
