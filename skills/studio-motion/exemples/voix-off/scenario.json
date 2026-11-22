@@ -1,0 +1,47 @@
+{
+  "titre": "Astuce plantes avec voix off (exemple)",
+  "format": "9:16",
+  "charte": "charte.json",
+  "musique": "musique.wav",
+  "voix": {
+    "voixId": "REMPLACER_PAR_L_ID_DE_VOTRE_VOIX_ELEVENLABS",
+    "vitesse": 1.05,
+    "prononciation": {
+      "cm": "centimètres"
+    }
+  },
+  "sousTitres": {
+    "style": "karaoke"
+  },
+  "scenes": [
+    {
+      "brique": "titre",
+      "texte": "Trois erreurs qui *tuent* vos plantes",
+      "transition": "zoom",
+      "voix": "Trois erreurs qui tuent vos plantes. Et presque tout le monde fait la première."
+    },
+    {
+      "brique": "liste",
+      "titre": "Les erreurs",
+      "elements": [
+        "Trop d'eau",
+        "Pas assez de lumière",
+        "Un pot sans trou"
+      ],
+      "voix": "Trop d'eau, pas assez de lumière, et un pot sans trou."
+    },
+    {
+      "brique": "chiffre",
+      "valeur": "2 cm",
+      "legende": "de terre sèche avant d'arroser",
+      "voix": "La règle simple : arrosez quand la terre est sèche sur deux centimètres."
+    },
+    {
+      "brique": "appel",
+      "titre": "Suivez *Maison Verte*",
+      "bouton": "S'abonner",
+      "icone": "coeur",
+      "voix": "Abonnez-vous pour d’autres astuces."
+    }
+  ]
+}

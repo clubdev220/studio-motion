@@ -1,0 +1,22 @@
+{
+  "nom": "Studio Voix d’Afrique",
+  "couleurs": {
+    "fond": "#1E1E1C",
+    "surface": "#2A2A27",
+    "surfaceSombre": "#232321",
+    "accent": "#D85A1B",
+    "accentClair": "#F4EEE6",
+    "accentProfond": "#3A7155",
+    "texte": "#F4F1EC",
+    "texteSecondaire": "#C9C4BB",
+    "encre": "#1E1E1C"
+  },
+  "polices": {
+    "titres": "Montserrat",
+    "texte": "Montserrat"
+  },
+  "logo": "logo.svg",
+  "logoClair": "logo-clair.svg",
+  "signature": "La voix qui donne vie aux histoires",
+  "tailleLogo": 150
+}

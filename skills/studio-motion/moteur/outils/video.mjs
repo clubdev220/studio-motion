@@ -10,6 +10,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { RACINE, cheminNavigateur, dataUrl, lireArgs, ouvrirNavigateur, quitter } from './commun.mjs';
 import { FICHIER_MEDIA, chargerScenario, verifier } from './verifier.mjs';
+import { normaliser } from './audio.mjs';
 
 const { pos, opt } = lireArgs();
 const [fichier, sortie] = pos;
@@ -41,6 +42,8 @@ const remplacer = (o) => {
 };
 sc.scenes = sc.scenes.map(remplacer);
 if (sc.musique) sc.musique = copier(dossier, sc.musique);
+if (sc.pisteVoix) sc.pisteVoix.src = copier(dossier, sc.pisteVoix.src);
+delete sc._voixErreur;
 if (sc.charte.logo) sc.charte.logo = copier(dossierCharte, sc.charte.logo);
 
 // 3. Scènes libres : copiées dans le moteur le temps du rendu (elles importent « remotion », « react » et « studio-motion »)
@@ -101,6 +104,11 @@ try {
     let dernier = -1;
     await renderMedia({ ...commun, codec: 'h264', crf: 20, concurrency: Number(opt.concurrence || 1), outputLocation: sortie,
       onProgress: ({ progress }) => { const p = Math.floor(progress * 10) * 10; if (p !== dernier) { dernier = p; process.stdout.write(`${p} % `); } } });
+    // Volume final : -14 LUFS (réseaux sociaux), crêtes -1,5 dBTP ; « normaliser »: false pour garder le mixage brut
+    if (sc.normaliser !== false && (sc.musique || sc.pisteVoix)) {
+      try { const n = normaliser(sortie, { cible: sc.normaliser?.cible ?? -14 }); console.log(`\nSon normalisé : ${n.avant.toFixed(1)} → ${n.apres} LUFS visés, crête ${n.crete ?? '?'} dBTP`); }
+      catch (e) { console.log(`\nATTENTION normalisation du son impossible : ${e.message.slice(0, 200)}`); }
+    }
     console.log(`\nVidéo rendue : ${sortie}`);
   }
 } finally {

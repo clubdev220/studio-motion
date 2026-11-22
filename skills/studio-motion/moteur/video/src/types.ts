@@ -36,5 +36,8 @@ export type Montage = {
   musique?: string;
   volumeMusique?: number;
   reperes?: boolean; // pastille de chapitre, logo discret et barre de progression (oui par défaut s'il y a des chapitres)
+  volumeMusiqueVoix?: number; // volume de la musique pendant la voix (0,05 par défaut)
+  pisteVoix?: { src: string; scenes: ({ debut: number; fin: number; decalage: number; duree: number; mots: { w: string; s: number; e: number }[] } | null)[] };
+  sousTitres?: boolean | { style?: 'karaoke' | 'pilule'; position?: 'bas' | 'milieu'; majuscules?: boolean; mots?: number };
   duree?: number; // calculée
 };

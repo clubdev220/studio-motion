@@ -1,0 +1,28 @@
+{
+  "modele": "offre",
+  "format": "4:5",
+  "charte": "charte.json",
+  "badge": "-20 %",
+  "surtitre": "Nouveau",
+  "titre": "Le mug qui garde votre thé *chaud*",
+  "image": "images/produit.svg",
+  "points": [
+    "45 min de chaleur, testé à l’atelier",
+    "Céramique émaillée, lavable en machine"
+  ],
+  "prix": "12 500 FCFA",
+  "ancienPrix": "15 600 FCFA",
+  "appel": "Commander sur WhatsApp",
+  "iconeAppel": "message",
+  "contact": [
+    {
+      "icone": "telephone",
+      "texte": "+226 00 00 00 00"
+    },
+    {
+      "icone": "lien",
+      "texte": "maisonverte.exemple"
+    }
+  ],
+  "mentions": "Prix de l’exemple, offre fictive."
+}

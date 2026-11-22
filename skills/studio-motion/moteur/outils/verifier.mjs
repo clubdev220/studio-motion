@@ -4,6 +4,7 @@ import { existsSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { RACINE, lireArgs, tailleImage } from './commun.mjs';
+import { dossierVoix, texteVoix } from './voix.mjs';
 
 export const FICHIER_MEDIA = /\.(png|jpe?g|webp|gif|svg|mp4|mov|webm|wav|mp3|m4a|ogg)$/i;
 const IMAGES = /\.(png|jpe?g|webp|gif|svg)$/i;
@@ -25,7 +26,7 @@ const mots = (s = '') => String(s).replace(/<[^>]+>/g, ' ').replace(/\*/g, '').s
 // Temps de lecture calibré sur des tutoriels validés par un client : ~3,3 mots/s + 1,5 s pour situer l'écran
 const lecture = (n) => 1.5 + n / 3.3;
 // Tous les textes affichés d'une scène (hors chemins de fichiers et réglages techniques)
-const TECH = new Set(['brique', 'duree', 'chapitre', 'transition', 'fond', 'fichier', 'image', 'images', 'video', 'focus', 'zoom', 'zone', 'at', 'clic', 'icone', 'style', 'disposition', 'alignement', 'taille', 'cote', 'id', 'de', 'a', 'shell', 'dossier', 'code', 'surligner', 'valeur', 'compteur', 'enAvant', 'debut', 'cadre', 'son', 'defilerDe', 'defilerA', 'active', 'adresse', 'reperes']);
+const TECH = new Set(['voix', 'sousTitres', 'brique', 'duree', 'chapitre', 'transition', 'fond', 'fichier', 'image', 'images', 'video', 'focus', 'zoom', 'zone', 'at', 'clic', 'icone', 'style', 'disposition', 'alignement', 'taille', 'cote', 'id', 'de', 'a', 'shell', 'dossier', 'code', 'surligner', 'valeur', 'compteur', 'enAvant', 'debut', 'cadre', 'son', 'defilerDe', 'defilerA', 'active', 'adresse', 'reperes']);
 const textes = (o, cle = '') => {
   if (typeof o === 'string') return TECH.has(cle) || FICHIER_MEDIA.test(o) ? '' : o;
   if (Array.isArray(o)) return o.map(x => textes(x, cle)).join(' ');
@@ -42,6 +43,19 @@ export function chargerScenario(fichier) {
     dossierCharte = path.dirname(fc);
     sc.charte = JSON.parse(readFileSync(fc, 'utf8'));
   }
+  // Voix off : la durée des scènes parlées vient de voix/voix.json (produit par outils/voix.mjs)
+  if (sc.voix) {
+    const dos = dossierVoix(fichier, sc), fj = path.join(dos, 'voix.json');
+    if (!existsSync(fj)) sc._voixErreur = 'Voix non générée : lancez « node moteur/outils/voix.mjs <scénario> » (ou retirez « voix »).';
+    else {
+      const vj = JSON.parse(readFileSync(fj, 'utf8'));
+      if (vj.cle !== texteVoix(sc).cle) sc._voixErreur = 'Voix périmée (textes « voix » ou réglages modifiés depuis la génération) : relancez « node moteur/outils/voix.mjs <scénario> ».';
+      else {
+        sc.scenes.forEach((s, i) => { const v = vj.scenes[i]; if (v) s.duree = Math.max(v.duree, Number(s.duree) || 0); });
+        sc.pisteVoix = { src: path.relative(dossier, path.join(dos, vj.fichier)).split(path.sep).join('/'), scenes: vj.scenes };
+      }
+    }
+  }
   return { sc, dossier, dossierCharte };
 }
 
@@ -51,6 +65,7 @@ export function verifier(fichier) {
   let sc, dossier, dossierCharte;
   try { ({ sc, dossier, dossierCharte } = chargerScenario(fichier)); } catch (e) { return { erreurs: [`Scénario ou charte illisible : ${e.message}`], alertes, duree: 0 }; }
 
+  if (sc._voixErreur) E(sc._voixErreur);
   if (!['16:9', '9:16', '1:1'].includes(sc.format)) E('« format » doit valoir "16:9", "9:16" ou "1:1".');
 
   // Charte
@@ -91,7 +106,7 @@ export function verifier(fichier) {
     const nom = `Scène ${i + 1} (${s.brique}, à ${t0.toFixed(1)} s)`;
     t0 += Number(s.duree) || 0;
     if (!BRIQUES[s.brique]) return E(`${nom} : brique inconnue. Choix : ${Object.keys(BRIQUES).join(', ')}.`);
-    if (!(s.duree > 0)) E(`${nom} : « duree » (secondes) manquante.`);
+    if (!(s.duree > 0) && !(sc.voix && s.voix)) E(`${nom} : « duree » (secondes) manquante.`);
     for (const r of BRIQUES[s.brique]) if (s[r] === undefined || s[r] === '' || (Array.isArray(s[r]) && !s[r].length)) E(`${nom} : réglage « ${r} » obligatoire.`);
     if (s.transition && !['fondu', 'glisse', 'zoom', 'coupe'].includes(s.transition)) E(`${nom} : transition inconnue (fondu, glisse, zoom, coupe).`);
     if (s.icone && !ICONES.includes(s.icone)) E(`${nom} : icône « ${s.icone} » inconnue. Choix : ${ICONES.join(', ')}.`);
@@ -123,7 +138,7 @@ export function verifier(fichier) {
       const base = { galerie: 3 * (s.images?.length || 1), photo: 3, video: 2, intro: 5, outro: 5, chapitre: 2.5 }[s.brique] || 0;
       const animation = { liste: 0.6 * (s.elements?.length || 0), recap: 0.6 * (s.items?.length || 0), carte: 0.8 * (s.lignes?.length || 0), etapes: 1, frise: 2, barres: 1.5, chiffre: 1.2, schema: 2, code: 2, terminal: 2 }[s.brique] || 0;
       const besoin = Math.max(base, lecture(n) + animation);
-      if (s.duree < besoin - 0.05) A(`${nom} : ${s.duree} s pour ${n} mots${animation ? ' et une animation' : ''} ; prévoir au moins ${besoin.toFixed(1)} s.`);
+      if (s.duree < besoin - 0.05 && !sc.pisteVoix?.scenes[i]) A(`${nom} : ${s.duree} s pour ${n} mots${animation ? ' et une animation' : ''} ; prévoir au moins ${besoin.toFixed(1)} s.`);
     }
     if (s.brique === 'carte' && s.lignes?.length > 4) A(`${nom} : plus de 4 lignes, la carte sera chargée.`);
     if (s.brique === 'recap' && s.items?.length > 5) A(`${nom} : plus de 5 points, le récapitulatif risque de dépasser.`);
@@ -141,6 +156,7 @@ export function verifier(fichier) {
       if (d < duree) A(`La musique dure ${d.toFixed(0)} s, moins que la vidéo (${duree.toFixed(0)} s) : elle s'arrêtera avant la fin.`);
     }
   } else A('Pas de musique (« musique »). Voir outils/musique.mjs.');
+  if (sc.sousTitres && !sc.voix) A('« sousTitres » demande une voix off (« voix ») : ignoré.');
   void IMAGES;
   return { erreurs, alertes, duree };
 }

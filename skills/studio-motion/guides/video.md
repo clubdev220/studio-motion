@@ -151,7 +151,11 @@ node moteur/outils/musique.mjs vif 50 mon-projet/musique.wav
 
 Durée = durée de la vidéo + quelques secondes. Styles : `doux` (posé), `entrainant` (marimba), `clair` (cloches,
 création), `calme` (piano lent), `vif` (rythmé : promos, réseaux sociaux), `pose` (très calme). Une musique
-différente par vidéo d'une série ; `--graine N` donne une variante du même style.
+différente par vidéo d'une série ; `--graine N` donne une variante du même style. Musique plus riche générée
+selon le propos de la vidéo (ElevenLabs) : voir [voix.md](voix.md#5-une-musique-différente-par-vidéo).
+
+**Voix off et sous-titres** : ajoutez un texte `voix` à chaque scène ; les scènes prennent alors la durée de la
+voix, la musique baisse sous la voix et les sous-titres s'affichent mot à mot. Voir [voix.md](voix.md).
 
 ## 6. Vérifier, images-tests, rendu
 
@@ -184,6 +188,8 @@ node moteur/outils/video.mjs mon-projet/promo.json mon-projet/promo.mp4
 - Contrôlez la durée du fichier et regardez quelques images de la vidéo finale.
 - Envoyez la vidéo avec un résumé : format, durée, déroulé, musique (originale, composée par le pack), points à
   valider (données fictives, informations à confirmer).
+- Pour une publication : proposez la légende de chaque réseau ([publication.md](publication.md)) et une
+  couverture 9:16 ([affiche.md](affiche.md)).
 - Série : envoyez chaque vidéo dès qu'elle est prête.
 
 ## Dépannage
