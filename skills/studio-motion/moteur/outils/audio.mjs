@@ -59,7 +59,7 @@ export function normaliser(fichier, { cible = -14, crete = -1.5 } = {}) {
   const j = JSON.parse((mesure.stderr.match(/\{[\s\S]*?\}/g) || []).pop());
   const tmp = fichier.replace(/(\.\w+)$/, '.norm$1');
   lancer(['-y', '-i', fichier, '-c:v', 'copy', '-af',
-    `loudnorm=I=${cible}:TP=${crete}:LRA=11:measured_I=${j.input_i}:measured_TP=${j.input_tp}:measured_LRA=${j.input_lra}:measured_thresh=${j.input_thresh}:offset=${j.target_offset}:linear=true,aresample=48000`,
+    `loudnorm=I=${cible}:TP=${crete}:LRA=11:measured_I=${j.input_i}:measured_TP=${j.input_tp}:measured_LRA=${j.input_lra}:measured_thresh=${j.input_thresh}:offset=${j.target_offset}:linear=true`, '-ac', '2',
     '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-movflags', '+faststart', tmp]);
   if (!existsSync(tmp)) throw new Error('normalisation : fichier non produit');
   renameSync(tmp, fichier);
